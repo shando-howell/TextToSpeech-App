@@ -4,8 +4,17 @@ import { useState } from 'react';
 export default function App() {
   const [text, setText] = useState('');
 
-  const handleConvert = () => {
-    console.log(text);
+  const handleConvert = async () => {
+
+    const response = await fetch('/api/tts', {
+      method: 'POST',
+      body: JSON.stringify({ 
+        text, 
+      })
+    })
+    const data = await response.json();
+
+    console.log("Response data: ", data)
 
     setText('');
   }
